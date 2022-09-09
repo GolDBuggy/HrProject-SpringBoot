@@ -20,7 +20,7 @@ public class CandidateController {
 
     private static Logger logger=Logger.getLogger(CandidateController.class.getName());
 
-    @GetMapping("/")
+    @GetMapping("/job")
     public String applicationPage(Model model){
         model.addAttribute("candidate",new Candidate());
         return "job-application";

@@ -29,7 +29,7 @@ public class JobAdvertisement {
 
     @Column(name = "application_deadline")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date deadline;
+    private LocalDate deadline;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "application_list",joinColumns = @JoinColumn(name = "job_id"),

@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="HrProject-SpringBoot" target="17" />
+      <module name="HrProject-SpringBoot" target="16" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
