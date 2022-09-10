@@ -33,4 +33,9 @@ public class MemberService {
             throw new RuntimeException("Passwords must be equals!");
     }
 
+
+    public Member getByEmail(String email){
+        return  repo.findByEmail(email).get();
+    }
+
 }

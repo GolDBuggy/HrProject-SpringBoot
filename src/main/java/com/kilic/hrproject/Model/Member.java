@@ -40,4 +40,16 @@ public class Member {
     @Column(name = "active")
     private boolean active;
 
+    @Column(name = "graduation")
+    private String graduation;
+
+    @Column(name = "school")
+    private String school;
+
+    @Column(name = "department")
+    private String department;
+
+    @Column(name = "certificate")
+    private String certificate;
+
 }

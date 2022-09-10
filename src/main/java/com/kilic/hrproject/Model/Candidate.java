@@ -52,10 +52,13 @@ public class Candidate {
     @Column(name = "applied")
     private boolean applied;
 
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "application_list",joinColumns = @JoinColumn(name = "candidate_id"),
                             inverseJoinColumns = @JoinColumn(name = "job_id"))
     private List<JobAdvertisement> jobAdvertisements;
+
+
 
 
 }
