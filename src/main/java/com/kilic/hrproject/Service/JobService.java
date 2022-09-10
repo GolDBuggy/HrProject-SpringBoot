@@ -19,6 +19,9 @@ public class JobService {
     }
 
 
+    public JobAdvertisement getById(long id){
+        return repo.findById(id).get();
+    }
     public List<JobAdvertisement> getAll(){
        return repo.findAll(Sort.by("deadline"));
     }

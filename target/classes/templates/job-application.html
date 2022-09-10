@@ -14,7 +14,8 @@
 <body>
     <h1>Job Application</h1>
 
-    <form class="form-inline" th:object="${candidate}" th:action="@{/apply}" method="POST">
+    <form class="form-inline" action="http://localhost:8080" enctype="multipart/form-data" th:object="${candidate}" th:action="@{/apply}" method="POST">
+        <input type="hidden" th:name="jobId" th:value="${JobId}">
         <div class="form-group">
             <label class="control-label col-sm-2" for="name">Name:</label>
             <div class="col-sm-10">
@@ -63,7 +64,20 @@
             <input type="text" class="form-control" th:field="*{jobExperiance}" id="jobY">
             </div>
         </div>
+        <input id="myFile" type="file" name="upload" accept="application/pdf" />
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+
+
+    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js" crossorigin="anonymous"></script>
+    <script>
+        const client = filestack.init('apikey');
+    </script>
 </body>
 </html>
+
+<script>
+    var myUploadedFile = document.getElementById("myFile").files[0];
+    console.log(myUploadedFile);
+</script>
