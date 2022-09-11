@@ -18,10 +18,7 @@ public class ApplyDto {
     private String name;
     private String surname;
     private String email;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birthday;
-    private String country;
-    private String province;
+    private InformationDto profile;
     private BigDecimal salary;
     private int jobExperiance;
     private boolean applied;

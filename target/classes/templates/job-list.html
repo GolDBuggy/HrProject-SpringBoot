@@ -22,16 +22,55 @@
             top:0;
             right:0;
         }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+            border-right:1px solid #bbb;
+        }
+
+        li:last-child {
+            border-right: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color:#04AA6DFF;
+        }
+
+        .create{
+              background-color: #0ab2a4;
+          }
     </style>
 </head>
 <body>
 <div>
-    <a th:href="@{/login}" class="btn btn-dark">Login</a>
-    <a th:href="@{/logout}" class="btn btn-dark">Logout</a>
-    <a th:href="@{/register}" class="btn btn-success">Sign Up</a>
-    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/create}" class="btn btn-primary">Create Job</a>
+    <ul>
+        <li> <a th:href="@{/login}" class="">Login</a></li>
+        <li><a th:href="@{/logout}" class="">Logout</a></li>
+        <li> <a th:href="@{/register}" class="">Sign Up</a></li>
+        <li> <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/create}" class="create">Create Job</a></li>
+        <li><a class="topcorner active" sec:authorize="isAuthenticated()" th:href="@{/profile}">Profil</a></li>
+
+    </ul>
 </div>
-<div class="topcorner"><a sec:authorize="isAuthenticated()" th:href="@{/profile}">Profil</a></div>
 <div class="formDiv">
  <h1 >Job List</h1>
  <table class="table-responsive-sm table-bordered table-hover" >

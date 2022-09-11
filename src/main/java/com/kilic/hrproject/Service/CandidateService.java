@@ -21,11 +21,11 @@ public class CandidateService {
     }
 
     public void save(ApplyDto applyDto){
-        Candidate candidate= Candidate.builder().country(applyDto.getCountry()).
-                birthday(applyDto.getBirthday()).email(applyDto.getEmail()).jobExperiance(applyDto.getJobExperiance()).
+        Candidate candidate= Candidate.builder().country(applyDto.getProfile().getCountry()).
+                birthday(applyDto.getProfile().getBirthday()).email(applyDto.getEmail()).jobExperiance(applyDto.getJobExperiance()).
                 salary(applyDto.getSalary()).name(applyDto.getName()).surname(applyDto.getSurname()).
                 jobAdvertisements(Arrays.asList(jobService.getById(applyDto.getJobId()))).applied(true).
-                province(applyDto.getProvince()).build();
+                province(applyDto.getProfile().getProvince()).build();
         candidateRepo.save(candidate);
     }
 

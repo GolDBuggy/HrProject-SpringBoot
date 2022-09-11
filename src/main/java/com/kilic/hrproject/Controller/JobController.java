@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
+
 @Controller
 @RequiredArgsConstructor
 public class JobController {
@@ -30,6 +32,7 @@ public class JobController {
 
     @GetMapping("/")
     public String listJob(Model model){
+
         model.addAttribute("jobs",service.getAll());
         return "job-list";
     }
