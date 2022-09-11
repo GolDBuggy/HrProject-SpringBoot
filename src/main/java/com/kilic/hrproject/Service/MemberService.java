@@ -2,6 +2,7 @@ package com.kilic.hrproject.Service;
 
 import com.kilic.hrproject.Dto.MemberDto;
 import com.kilic.hrproject.Model.Member;
+import com.kilic.hrproject.Model.Profile;
 import com.kilic.hrproject.Repository.MemberRepo;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     private final MemberRepo repo;
+    private final ProfileService profileService;
     private final ModelMapper mapper;
     private final BCryptPasswordEncoder encoder;
 
@@ -25,6 +27,7 @@ public class MemberService {
         member.setActive(true);
         member.setRoles(DEFAULT);
         repo.save(member);
+        createProfile(member);
     }
 
 
@@ -38,4 +41,14 @@ public class MemberService {
         return  repo.findByEmail(email).get();
     }
 
+
+    public void update(Member member) {
+        repo.save(member);
+    }
+
+
+    private void createProfile(Member member){
+        Profile profile= Profile.builder().member(member).build();
+        profileService.saveProfile(profile);
+    }
 }

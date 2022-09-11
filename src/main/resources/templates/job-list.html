@@ -31,7 +31,7 @@
     <a th:href="@{/register}" class="btn btn-success">Sign Up</a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/create}" class="btn btn-primary">Create Job</a>
 </div>
-<div class="topcorner"><a sec:authorize="isAuthenticated()" th:href="@{/profile}">Profil</a></div>
+<div class="topcorner"><a class="btn btn-info" sec:authorize="isAuthenticated()" th:href="@{/profile}">Profil</a></div>
 <div class="formDiv">
  <h1 >Job List</h1>
  <table class="table-responsive-sm table-bordered table-hover" >

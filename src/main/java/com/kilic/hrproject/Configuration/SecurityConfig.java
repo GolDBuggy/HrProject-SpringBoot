@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/register","/register/**","/","/apply").permitAll().and().
+                authorizeRequests().antMatchers("/profile","/update").hasRole("USER").and().
                authorizeRequests().antMatchers("/create","/save").hasRole("ADMIN").and()
                 .formLogin().
         loginPage("/login").loginProcessingUrl("/access").usernameParameter("email").

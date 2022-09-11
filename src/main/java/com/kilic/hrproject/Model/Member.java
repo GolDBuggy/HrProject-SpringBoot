@@ -1,10 +1,12 @@
 package com.kilic.hrproject.Model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -12,7 +14,8 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Member {
+@Builder
+public class Member{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,25 +34,13 @@ public class Member {
     @Column(name = "member_password")
     private String password;
 
-    @Column(name = "birthday")
-    private LocalDate birthday;
-
     @Column(name = "roles")
     private String roles;
 
     @Column(name = "active")
     private boolean active;
 
-    @Column(name = "graduation")
-    private String graduation;
-
-    @Column(name = "school")
-    private String school;
-
-    @Column(name = "department")
-    private String department;
-
-    @Column(name = "certificate")
-    private String certificate;
+    @OneToOne(mappedBy = "member")
+    private Profile profile;
 
 }

@@ -28,7 +28,7 @@ public class JobController {
         return "redirect:/list";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public String listJob(Model model){
         model.addAttribute("jobs",service.getAll());
         return "job-list";
