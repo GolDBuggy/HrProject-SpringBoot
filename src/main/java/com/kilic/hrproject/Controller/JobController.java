@@ -34,7 +34,7 @@ public class JobController {
     public String listJob(Model model){
 
         model.addAttribute("jobs",service.getAll());
-        return "job-list";
+        return "joblist";
     }
 
 

@@ -27,6 +27,15 @@ public class JobAdvertisement {
     @Column(name = "job_name")
     private String jobName;
 
+    @Column(name = "job_location")
+    private String jobLocation;
+
+    @Column(name = "job_grade")
+    private String jobGrade;
+
+    @Column(name = "expected_salary")
+    private String expectedSalary;
+
     @Column(name = "application_deadline")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline;

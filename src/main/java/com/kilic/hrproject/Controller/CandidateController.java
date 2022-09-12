@@ -29,9 +29,8 @@ public class CandidateController {
 
     @GetMapping("/job")
     public String applicationPage(@RequestParam("id") long id, Model model,Principal principal){
-        logger.info(id+"  ");
         model.addAttribute("JobId",id);
-        if (!principal.getName().isEmpty()){
+        if (!(principal==null)){
             ApplyDto applyDto=mapper.map(memberService.getByEmail(principal.getName()),ApplyDto.class);
             model.addAttribute("candidate",applyDto);
         }
