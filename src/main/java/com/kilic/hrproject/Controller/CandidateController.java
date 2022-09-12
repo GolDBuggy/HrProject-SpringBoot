@@ -3,8 +3,8 @@ package com.kilic.hrproject.Controller;
 import com.kilic.hrproject.Dto.ApplyDto;
 import com.kilic.hrproject.Model.Candidate;
 import com.kilic.hrproject.Service.CandidateService;
-import com.kilic.hrproject.Service.FileSystemStorageService;
 import com.kilic.hrproject.Service.MemberService;
+import com.kilic.hrproject.Service.StorageService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class CandidateController {
 
     private final CandidateService candidateService;
     private final MemberService memberService;
-    private final FileSystemStorageService storageService;
+    private final StorageService storageService;
     private final ModelMapper mapper;
 
     private static Logger logger=Logger.getLogger(CandidateController.class.getName());

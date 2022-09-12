@@ -64,13 +64,20 @@
             <input type="text" class="form-control" th:field="*{jobExperiance}" id="jobY">
             </div>
         </div>
-        <input id="myFile" type="file" name="upload" th:field="*{file}" accept="application/pdf" />
+        <input id="myFile" type="file" th:field="*{file}" name="upload" accept="application/pdf" />
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 
 
-
+    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js" crossorigin="anonymous"></script>
+    <script>
+        const client = filestack.init('apikey');
+    </script>
 </body>
 </html>
 
+<script>
+    var myUploadedFile = document.getElementById("myFile").files[0];
+    console.log(myUploadedFile);
+</script>
