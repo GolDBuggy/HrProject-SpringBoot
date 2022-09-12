@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Column;
 import java.math.BigDecimal;
@@ -23,4 +24,5 @@ public class ApplyDto {
     private int jobExperiance;
     private boolean applied;
     private long jobId;
+    private MultipartFile file;
 }

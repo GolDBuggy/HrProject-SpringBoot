@@ -3,6 +3,7 @@ package com.kilic.hrproject.Controller;
 import com.kilic.hrproject.Dto.ApplyDto;
 import com.kilic.hrproject.Model.Candidate;
 import com.kilic.hrproject.Service.CandidateService;
+import com.kilic.hrproject.Service.FileSystemStorageService;
 import com.kilic.hrproject.Service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,6 +24,7 @@ public class CandidateController {
 
     private final CandidateService candidateService;
     private final MemberService memberService;
+    private final FileSystemStorageService storageService;
     private final ModelMapper mapper;
 
     private static Logger logger=Logger.getLogger(CandidateController.class.getName());
@@ -43,6 +45,7 @@ public class CandidateController {
     @PostMapping("/apply")
     public String save(@ModelAttribute("candidate") ApplyDto candidate){
         logger.info(" "+ candidate);
+        storageService.store(candidate.getFile());
         candidateService.save(candidate);
         return "job-application";
     }
