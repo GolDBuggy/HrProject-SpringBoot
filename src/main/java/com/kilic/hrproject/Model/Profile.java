@@ -46,5 +46,7 @@ public class Profile implements Serializable {
     @Column(name = "certificate")
     private String certificate;
 
-
+    @OneToOne
+    @JoinColumn(name = "image_id")
+    private Image image;
 }

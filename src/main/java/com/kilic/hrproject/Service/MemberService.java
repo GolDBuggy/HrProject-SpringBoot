@@ -1,6 +1,7 @@
 package com.kilic.hrproject.Service;
 
 import com.kilic.hrproject.Dto.MemberDto;
+import com.kilic.hrproject.Model.Image;
 import com.kilic.hrproject.Model.Member;
 import com.kilic.hrproject.Model.Profile;
 import com.kilic.hrproject.Repository.MemberRepo;
@@ -48,7 +49,8 @@ public class MemberService {
 
 
     private void createProfile(Member member){
-        Profile profile= Profile.builder().member(member).build();
+        Image image=new Image();
+        Profile profile= Profile.builder().member(member).image(image).build();
         profileService.saveProfile(profile);
     }
 }

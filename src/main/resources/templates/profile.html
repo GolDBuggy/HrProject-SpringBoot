@@ -18,8 +18,18 @@
 </head>
 <body>
 <div class="formDiv">
-<form th:object="${profile}" th:action="@{/update}" method="POST">
+<form th:object="${profil}" enctype="multipart/form-data" th:action="@{/update}" method="POST">
+
+    <div class="flex-shrink-0">
+        <img  th:src="@{*{profile.image.path}}"
+             alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
+             style="width: 70px;">
+    </div>
     <div class="form-outline mb-4">
+        <input type="file" th:field="*{file}" accept="image/jpeg">
+    </div>
+    <div class="form-outline mb-4">
+        <input type="hidden"  th:field="*{profile.image}"/>
         <input type="text" id="form4Example1" th:field="*{name}" class="form-control" />
         <label class="form-label" for="form4Example1">Name</label>
     </div>

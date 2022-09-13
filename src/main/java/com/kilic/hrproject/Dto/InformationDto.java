@@ -1,5 +1,6 @@
 package com.kilic.hrproject.Dto;
 
+import com.kilic.hrproject.Model.Image;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,5 @@ public class InformationDto {
     private String school;
     private String department;
     private String certificate;
+    private Image image;
 }

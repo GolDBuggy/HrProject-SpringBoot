@@ -17,6 +17,5 @@ public class MemberDto {
     private String surname;
     private String password;
     private String rePass;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birthday;
+
 }

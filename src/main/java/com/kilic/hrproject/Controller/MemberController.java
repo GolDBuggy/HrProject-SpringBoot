@@ -2,10 +2,12 @@ package com.kilic.hrproject.Controller;
 
 import com.kilic.hrproject.Dto.MemberDto;
 import com.kilic.hrproject.Dto.ProfileDto;
+import com.kilic.hrproject.Model.Image;
 import com.kilic.hrproject.Model.Member;
 import com.kilic.hrproject.Model.Profile;
 import com.kilic.hrproject.Service.MemberService;
 import com.kilic.hrproject.Service.ProfileService;
+import com.kilic.hrproject.Service.StorageService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ public class MemberController {
 
     private final MemberService service;
     private final ProfileService profileService;
+    private final StorageService storageService;
     private final ModelMapper mapper;
 
 
@@ -34,7 +37,8 @@ public class MemberController {
     @GetMapping("/profile")
     public String profile(Model model, Principal principal){
         ProfileDto profileDto=mapper.map(service.getByEmail(principal.getName()),ProfileDto.class);
-        model.addAttribute("profile",profileDto);
+        System.out.println(profileDto.getProfile().getImage().getPath());
+        model.addAttribute("profil",profileDto);
         return "profile";
     }
 
@@ -52,11 +56,14 @@ public class MemberController {
 
     @PostMapping("/update")
     public String update(@ModelAttribute("profile")ProfileDto profileDto,Principal principal){
+        storageService.store(profileDto.getFile());
+        String[] link=storageService.load(profileDto.getFile().getOriginalFilename()).toString().replace('\\','/').split("/");
+        profileDto.getProfile().getImage().setPath("/image/"+link[link.length-1]);
         Profile profile=mapper.map(profileDto.getProfile(),Profile.class);
         Member member= service.getByEmail(principal.getName());
         profile.setId(member.getProfile().getId());
         profile.setMember(member);
-        profileService.saveProfile(profile);
+        profileService.updateProfile(profile);
         return "redirect:/profile";
     }
 }

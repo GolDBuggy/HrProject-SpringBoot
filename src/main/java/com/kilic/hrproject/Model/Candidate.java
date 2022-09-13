@@ -52,6 +52,10 @@ public class Candidate {
     @Column(name = "applied")
     private boolean applied;
 
+    @OneToOne
+    @JoinColumn(name = "file_path")
+    private FilePath path;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "application_list",joinColumns = @JoinColumn(name = "candidate_id"),

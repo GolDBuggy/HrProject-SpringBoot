@@ -1,22 +1,29 @@
 package com.kilic.hrproject.Controller;
 
 import com.kilic.hrproject.Dto.ApplyDto;
+import com.kilic.hrproject.Dto.ReferenceDto;
 import com.kilic.hrproject.Model.Candidate;
 import com.kilic.hrproject.Service.CandidateService;
 import com.kilic.hrproject.Service.MemberService;
 import com.kilic.hrproject.Service.StorageService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,10 +49,36 @@ public class CandidateController {
     }
 
 
+
+
+    @GetMapping("/list")
+    public String applyList(Model model){
+        List<ReferenceDto> referenceDtos=new ArrayList<>();
+        candidateService.getAll().stream().forEach(e -> referenceDtos.add(new ReferenceDto(e.getName(),e.getSurname(),
+                                                e.getEmail(),e.getJobAdvertisements(),
+                MvcUriComponentsBuilder.fromMethodName(CandidateController.class,
+                        "serveFile", e.getPath().getPath()).build().toUri().toString())));
+
+
+
+        model.addAttribute("liste",referenceDtos);
+        return "reference-list";
+    }
+
+    @GetMapping("/files/cv")
+    public ResponseEntity<Resource> serveFile(String filename) {
+
+        Resource file = storageService.loadPdfAsResource(filename);
+
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
+
     @PostMapping("/apply")
     public String save(@ModelAttribute("candidate") ApplyDto candidate){
-        logger.info(" "+ candidate);
-        storageService.store(candidate.getFile());
+        logger.info(" "+ candidate+" "+candidate.getFile().getOriginalFilename());
+        storageService.storePdf(candidate.getFile());
         candidateService.save(candidate);
         return "job-application";
     }
