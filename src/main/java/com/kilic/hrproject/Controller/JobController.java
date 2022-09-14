@@ -27,7 +27,7 @@ public class JobController {
     public String save(@ModelAttribute("job")JobAdvertisement advertisement){
         service.save(advertisement);
 
-        return "redirect:/list";
+        return "redirect:/";
     }
 
     @GetMapping("/")
