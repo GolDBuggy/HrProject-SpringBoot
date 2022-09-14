@@ -77,8 +77,9 @@ public class CandidateController {
 
     @PostMapping("/apply")
     public String save(@ModelAttribute("candidate") ApplyDto candidate){
-        logger.info(" "+ candidate+" "+candidate.getFile().getOriginalFilename());
-        storageService.storePdf(candidate.getFile());
+        if (!candidate.getFile().isEmpty())
+           storageService.storePdf(candidate.getFile());
+
         candidateService.save(candidate);
         return "job-application";
     }

@@ -56,9 +56,11 @@ public class MemberController {
 
     @PostMapping("/update")
     public String update(@ModelAttribute("profile")ProfileDto profileDto,Principal principal){
-        storageService.store(profileDto.getFile());
-        String[] link=storageService.load(profileDto.getFile().getOriginalFilename()).toString().replace('\\','/').split("/");
-        profileDto.getProfile().getImage().setPath("/image/"+link[link.length-1]);
+        if(!profileDto.getFile().isEmpty()) {
+            storageService.store(profileDto.getFile());
+            String[] link = storageService.load(profileDto.getFile().getOriginalFilename()).toString().replace('\\', '/').split("/");
+            profileDto.getProfile().getImage().setPath("/image/" + link[link.length - 1]);
+        }
         Profile profile=mapper.map(profileDto.getProfile(),Profile.class);
         Member member= service.getByEmail(principal.getName());
         profile.setId(member.getProfile().getId());
