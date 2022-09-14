@@ -18,6 +18,9 @@ public class JobService {
         repo.save(advertisement);
     }
 
+    public void deleteById(long id){
+        repo.deleteById(id);
+    }
 
     public JobAdvertisement getById(long id){
         return repo.findById(id).get();

@@ -44,4 +44,7 @@ public class JobAdvertisement {
     @JoinTable(name = "application_list",joinColumns = @JoinColumn(name = "job_id"),
             inverseJoinColumns = @JoinColumn(name = "candidate_id"))
     private List<Candidate> candidates;
+
+
+
 }

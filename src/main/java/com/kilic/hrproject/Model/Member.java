@@ -1,17 +1,16 @@
 package com.kilic.hrproject.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "members")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -42,5 +41,7 @@ public class Member{
 
     @OneToOne(mappedBy = "member")
     private Profile profile;
+
+
 
 }

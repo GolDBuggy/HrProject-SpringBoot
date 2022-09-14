@@ -5,9 +5,7 @@ import com.kilic.hrproject.Service.JobService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -27,6 +25,12 @@ public class JobController {
     public String save(@ModelAttribute("job")JobAdvertisement advertisement){
         service.save(advertisement);
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete")
+    public String deleteJob(@RequestParam("id") long id){
+        service.deleteById(id);
         return "redirect:/";
     }
 
