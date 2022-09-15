@@ -34,6 +34,8 @@ public class JobController {
         return "redirect:/";
     }
 
+
+
     @GetMapping("/")
     public String listJob(Model model){
 

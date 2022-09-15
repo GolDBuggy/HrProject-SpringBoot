@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "profile")
@@ -49,4 +50,9 @@ public class Profile implements Serializable {
     @OneToOne
     @JoinColumn(name = "image_id")
     private Image image;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "job_save",joinColumns = @JoinColumn(name = "profile_id"),
+            inverseJoinColumns = @JoinColumn(name = "job_id"))
+    private List<JobAdvertisement> savedJobs;
 }

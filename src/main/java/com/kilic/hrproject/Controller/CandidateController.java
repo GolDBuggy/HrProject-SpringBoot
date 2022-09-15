@@ -3,7 +3,9 @@ package com.kilic.hrproject.Controller;
 import com.kilic.hrproject.Dto.ApplyDto;
 import com.kilic.hrproject.Dto.ReferenceDto;
 import com.kilic.hrproject.Model.Candidate;
+import com.kilic.hrproject.Model.Member;
 import com.kilic.hrproject.Service.CandidateService;
+import com.kilic.hrproject.Service.JobService;
 import com.kilic.hrproject.Service.MemberService;
 import com.kilic.hrproject.Service.StorageService;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +15,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -31,6 +33,7 @@ public class CandidateController {
 
     private final CandidateService candidateService;
     private final MemberService memberService;
+    private final JobService jobService;
     private final StorageService storageService;
     private final ModelMapper mapper;
 
@@ -64,6 +67,9 @@ public class CandidateController {
         model.addAttribute("liste",referenceDtos);
         return "reference-list";
     }
+
+
+
 
     @GetMapping("/files/cv")
     public ResponseEntity<Resource> serveFile(String filename) {

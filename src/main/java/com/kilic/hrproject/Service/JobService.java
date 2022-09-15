@@ -22,6 +22,10 @@ public class JobService {
         repo.deleteById(id);
     }
 
+    public JobAdvertisement getByName(String name){
+        return repo.findByJobName(name).get();
+    }
+
     public JobAdvertisement getById(long id){
         return repo.findById(id).get();
     }

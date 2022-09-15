@@ -46,5 +46,8 @@ public class JobAdvertisement {
     private List<Candidate> candidates;
 
 
-
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "job_save",joinColumns = @JoinColumn(name = "job_id"),
+            inverseJoinColumns = @JoinColumn(name = "profile_id"))
+    private List<Profile> profiles;
 }

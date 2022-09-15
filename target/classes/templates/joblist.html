@@ -56,9 +56,8 @@
                     <li ><i class="fa fa-money"  th:text="${job.expectedSalary}" aria-hidden="true"></i></li>
                 </ul>
                 <ul class="job-social tr-list">
-                    <li><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/delete(id=${job.id})}"><i class="fa fa-sharp fa-solid fa-minus" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i></a></li>
+                    <li><a th:href="@{/enrollment(name=${job.jobName})}"><i class="fa fa-bookmark-o" aria-hidden="true"></i></a></li>
                     <li><a th:href="@{/job(id=${job.id})}" ><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
