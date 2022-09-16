@@ -17,25 +17,21 @@
     <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
         <tr>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Mail</th>
+            <th>Job Name</th>
+
             <th>JOB</th>
 
 
         </tr>
         </thead>
         <tbody>
-        <tr th:each="job : ${jobList}">
-            <td th:text="${job.member.name}"></td>
-            <td th:text="${job.member.surname}"></td>
-            <td th:text="${job.member.email}"></td>
+        <tr th:each="jobs : ${job}">
             <td>
-                <th:block th:each="jobs : ${job.savedJobs}">
-                    <a th:text="${jobs.jobName}" th:href="@{/job(id=${jobs.id})}"></a>
-                </th:block>
+                <a th:text="${jobs.jobName}" th:href="@{/job(id=${jobs.id})}"></a>
             </td>
-
+            <td>
+                <a class="btn btn-warning" th:href="@{/delete/saved(id=${jobs.id})}">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>

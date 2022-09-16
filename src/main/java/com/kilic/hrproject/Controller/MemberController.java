@@ -3,7 +3,7 @@ package com.kilic.hrproject.Controller;
 import com.kilic.hrproject.Dto.MemberDto;
 import com.kilic.hrproject.Dto.ProfileDto;
 import com.kilic.hrproject.Dto.SavedJobListDto;
-import com.kilic.hrproject.Model.Image;
+import com.kilic.hrproject.Model.JobAdvertisement;
 import com.kilic.hrproject.Model.Member;
 import com.kilic.hrproject.Model.Profile;
 import com.kilic.hrproject.Service.JobService;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Controller
 @RequiredArgsConstructor
@@ -52,6 +52,16 @@ public class MemberController {
         return "sign-up";
     }
 
+    @GetMapping("/delete/saved")
+    public String deleteJob(@RequestParam("id") long id, Principal principal){
+        Profile profile=service.getByEmail(principal.getName()).getProfile();
+       profile.getSavedJobs().remove(jobService.getById(id));
+
+
+        profileService.deleteProfileJob(profile);
+        return "redirect:/saved";
+    }
+
     @GetMapping("/enrollment")
     public String saveJob(@RequestParam("name") String jobName, Principal principal){
         Profile profile=service.getByEmail(principal.getName()).getProfile();
@@ -63,7 +73,7 @@ public class MemberController {
     @GetMapping("/saved")
     public String savedJob(Model model,Principal principal){
         SavedJobListDto jobListDto=mapper.map(service.getByEmail(principal.getName()).getProfile(),SavedJobListDto.class);
-        model.addAttribute("jobList",jobListDto);
+        model.addAttribute("job",jobListDto.getSavedJobs());
         return "saved-job";
     }
 
