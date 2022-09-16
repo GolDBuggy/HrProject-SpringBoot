@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Setter
 public class StorageProperties {
 
-    private String location = "C:/Users/hakki/Documents/GitHub/HrProject-SpringBoot/src/main/resources/image";
-    private String pdfLocation = "C:/Users/hakki/Documents/GitHub/HrProject-SpringBoot/src/main/resources/CvFolder";
+    private String location = "../HrProject-SpringBoot/src/main/resources/image";
+    private String pdfLocation = "../HrProject-SpringBoot/src/main/resources/CvFolder";
 
 
 }
